@@ -11,7 +11,7 @@ slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUue
 
 @app.route('/')
 def index():
-    return 'run from git)'
+    return 'run from git test 2)'
 
 @app.route('/inc/<id>/')
 def get_id(id):
