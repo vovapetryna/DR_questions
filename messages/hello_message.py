@@ -39,7 +39,6 @@ class HelloMsg:
         }
 
 
-@staticmethod
 def make_section_block(text):
     return {
         "type": "section",
@@ -50,6 +49,5 @@ def make_section_block(text):
     }
 
 
-@staticmethod
 def make_divider_block():
     return {"type": "divider"}
