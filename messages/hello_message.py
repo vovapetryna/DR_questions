@@ -5,25 +5,24 @@ if cfg.lang == 'en':
 else:
     import localization.ru as msg_cfg
 
+from messages.message_base import MessageBase
 
-class HelloMsg:
+
+class HelloMsg(MessageBase):
     """Constructs the hello message with respect to
-    a config"""
+    a config based on MessageBase class"""
 
     def __init__(self, channel):
-        self.channel = channel
-        self.username = cfg.bot_info['name']
-        self.icon_emoji = cfg.bot_info['icon_emoji']
-        self.timestamp = ""
+        MessageBase.__init__(self, channel)
 
-    def get_message_payload(self):
+    def __call__(self):
         return {
             "ts": self.timestamp,
             "channel": self.channel,
             "username": self.username,
             "icon_emoji": self.icon_emoji,
             "blocks": [
-                make_section_block(msg_cfg.hello_message['hello'])
+                self.make_section_block(msg_cfg.hello_message['hello'])
             ],
         }
 
@@ -34,20 +33,8 @@ class HelloMsg:
             "username": self.username,
             "icon_emoji": self.icon_emoji,
             "blocks": [
-                make_section_block(text),
+                MessageBase.DIVIDER_BLOCK,
+                self.make_section_block(text),
+                MessageBase.DIVIDER_BLOCK,
             ],
         }
-
-
-def make_section_block(text):
-    return {
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": text,
-        },
-    }
-
-
-def make_divider_block():
-    return {"type": "divider"}

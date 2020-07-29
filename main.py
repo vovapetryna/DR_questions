@@ -1,116 +1,47 @@
 import os
 import logging
-from flask import Flask
+from flask import Flask, request, make_response
 from slack import WebClient
-# from messages.hello_message import HelloMsg
-# from messages.base_message import OnboardingTutorial
-from slackeventsapi import SlackEventAdapter
+from slack.signature import SignatureVerifier
+from cores.buttons_core import ButtonCore, module_check
+from cores.events_core import EventsCore, add_new_member, bot_tag
+import config as cfg
+import json
 
-class OnboardingTutorial:
-    """Constructs the onboarding message and stores the state of which tasks were completed."""
-
-    WELCOME_BLOCK = {
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": (
-                "Welcome to Slack! :wave: We're so glad you're here. :blush:\n\n"
-                "*Get started by completing the steps below:*"
-            ),
-        },
-    }
-    DIVIDER_BLOCK = {"type": "divider"}
-
-    def __init__(self, channel):
-        self.channel = channel
-        self.username = "pythonboardingbot"
-        self.icon_emoji = ":robot_face:"
-        self.timestamp = ""
-        self.reaction_task_completed = False
-        self.pin_task_completed = False
-
-    def get_message_payload(self):
-        return {
-            "ts": self.timestamp,
-            "channel": self.channel,
-            "username": self.username,
-            "icon_emoji": self.icon_emoji,
-            "blocks": [
-                self.WELCOME_BLOCK,
-                self.DIVIDER_BLOCK,
-                *self._get_reaction_block(),
-                self.DIVIDER_BLOCK,
-                *self._get_pin_block(),
-            ],
-        }
-
-    def _get_reaction_block(self):
-        task_checkmark = self._get_checkmark(self.reaction_task_completed)
-        text = (
-            f"{task_checkmark} *Add an emoji reaction to this message* :thinking_face:\n"
-            "You can quickly respond to any message on Slack with an emoji reaction."
-            "Reactions can be used for any purpose: voting, checking off to-do items, showing excitement."
-        )
-        information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/206870317-Emoji-reactions|"
-            "Learn How to Use Emoji Reactions>*"
-        )
-        return self._get_task_block(text, information)
-
-    def _get_pin_block(self):
-        task_checkmark = self._get_checkmark(self.pin_task_completed)
-        text = (
-            f"{task_checkmark} *Pin this message* :round_pushpin:\n"
-            "Important messages and files can be pinned to the details pane in any channel or"
-            " direct message, including group messages, for easy reference."
-        )
-        information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/205239997-Pinning-messages-and-files"
-            "|Learn How to Pin a Message>*"
-        )
-        return self._get_task_block(text, information)
-
-    @staticmethod
-    def _get_checkmark(task_completed: bool) -> str:
-        if task_completed:
-            return ":white_check_mark:"
-        return ":white_large_square:"
-
-    @staticmethod
-    def _get_task_block(text, information):
-        return [
-            {"type": "section", "text": {"type": "mrkdwn", "text": text}},
-            {"type": "context", "elements": [{"type": "mrkdwn", "text": information}]},
-        ]
 
 app = Flask(__name__)
+slack_web_client = WebClient(token=cfg.secure['bot_token'])
+signature_verifier = SignatureVerifier(cfg.secure['signing_secret'])
+button_core = ButtonCore()
+event_core = EventsCore()
 
-proxies = os.environ['https_proxy']
+"""Add all buttons events"""
+button_core.add_event('Module#', module_check)
 
-slack_events_adapter = SlackEventAdapter('97dc871214d1284acda832372929a19a', "/slack/events", app)
-slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ', proxy=proxies)
+"""Add all simple events"""
+event_core.add_event('member_joined_channel', add_new_member)
+event_core.add_event('app_mention', bot_tag)
 
-msg = OnboardingTutorial('C017BQA2RM4')
-message = msg.get_message_payload()
+"""main event processing part"""
+@app.route("/slack/events", methods=["POST"])
+def slack_app():
+    """process all eventsAPI with buttons event and other simple events"""
+    if not signature_verifier.is_valid_request(request.get_data(), request.headers):
+        return make_response("invalid request", 403)
 
-slack_web_client.chat_postMessage(**message)
+    if "payload" in request.form:
+        payload = json.loads(request.form.get('payload', {}))
+        if payload.get('type', '') == 'block_actions':
+            button_core(payload)
 
-@app.route('/')
-def index():
-    return 'run from git test 2)'
+        return make_response("", 200)
 
-@app.route('/inc/<id>/')
-def get_id(id):
-    return f'requested page with id = {id} returned id = {int(id) + 1}'
+    elif "event" in request.get_json():
+        event_core(request.get_json().get('event', {}), slack_web_client)
+        return make_response("", 200)
 
-@app.route('/sendmsg/<text>')
-def send_msg(text):
-    msg = OnboardingTutorial('C017BQA2RM4')
-    message = msg.get_message_payload()
+    return make_response("", 404)
 
-    slack_web_client.chat_postMessage(**message)
-    return f'message with text = {text} sent!!!'
-    return message
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

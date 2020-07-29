@@ -20,7 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f60748bf-f741-479b-a627-bde3b29b8135" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cores/buttons_core.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cores/events_core.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messages/message_base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messages/module_message.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localization/en.py" beforeDir="false" afterPath="$PROJECT_DIR$/localization/en.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/hello_message.py" beforeDir="false" afterPath="$PROJECT_DIR$/messages/hello_message.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +56,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="buttons_core" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DR_questions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cores" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cores/buttons_core.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DR_questions" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,6 +102,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.buttons_core" />
       </list>
     </recent_temporary>
   </component>
@@ -109,29 +139,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596012922294" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1596017612507">
+    <state width="1899" height="322" key="GridCell.Tab.0.bottom" timestamp="1596039917968">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596017612507" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1596017612507">
+    <state width="1899" height="322" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596039917968" />
+    <state width="1899" height="322" key="GridCell.Tab.0.center" timestamp="1596039917967">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596017612507" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1596017612507">
+    <state width="1899" height="322" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596039917967" />
+    <state width="1899" height="322" key="GridCell.Tab.0.left" timestamp="1596039917967">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596017612507" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1596017612507">
+    <state width="1899" height="322" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596039917967" />
+    <state width="1899" height="322" key="GridCell.Tab.0.right" timestamp="1596039917968">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596017612507" />
+    <state width="1899" height="322" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596039917968" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1595932086805">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1595932086805" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596012971221">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596037797696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596012971221" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596037797696" />
   </component>
 </project>
