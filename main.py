@@ -85,7 +85,7 @@ class OnboardingTutorial:
 
 app = Flask(__name__)
 
-proxies = "proxy.server:3128"
+proxies = {'http': os.environ['http_proxy'], 'https': os.environ['https_proxy']}
 
 slack_events_adapter = SlackEventAdapter('97dc871214d1284acda832372929a19a', "/slack/events", app)
 slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ', proxy=proxies)
