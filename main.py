@@ -84,8 +84,11 @@ class OnboardingTutorial:
         ]
 
 app = Flask(__name__)
+
+proxies = "proxy.server:3128"
+
 slack_events_adapter = SlackEventAdapter('97dc871214d1284acda832372929a19a', "/slack/events", app)
-slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ')
+slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ', proxy=proxies)
 
 @app.route('/')
 def index():
