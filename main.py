@@ -3,6 +3,7 @@ import logging
 from flask import Flask
 from slack import WebClient
 from messages.hello_message import HelloMsg
+from messages.base_message import OnboardingTutorial
 from slackeventsapi import SlackEventAdapter
 
 app = Flask(__name__)
@@ -19,8 +20,8 @@ def get_id(id):
 
 @app.route('/sendmsg/<text>')
 def send_msg(text):
-    msg = HelloMsg('C017BQA2RM4')
-    message = msg.get_simple_message_payload(text)
+    msg = OnboardingTutorial('C017BQA2RM4')
+    message = msg.get_message_payload()
     print(message)
     slack_web_client.chat_postMessage(**message)
     return f'message with text = {text} sent!!!'
