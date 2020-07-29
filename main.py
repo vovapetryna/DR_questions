@@ -22,9 +22,9 @@ def get_id(id):
 def send_msg(text):
     msg = OnboardingTutorial('C017BQA2RM4')
     message = msg.get_message_payload()
-    print(message)
-    slack_web_client.chat_postMessage(**message)
-    return f'message with text = {text} sent!!!'
+    return message
+    # slack_web_client.chat_postMessage(**message)
+    # return f'message with text = {text} sent!!!'
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
