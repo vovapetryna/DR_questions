@@ -2,7 +2,7 @@ import os
 import logging
 from flask import Flask
 from slack import WebClient
-from message import OnboardingTutorial
+from messages.hello_message import HelloMsg
 from slackeventsapi import SlackEventAdapter
 
 app = Flask(__name__)
@@ -19,19 +19,10 @@ def get_id(id):
 
 @app.route('/sendmsg/<text>')
 def send_msg(text):
-    onboarding_tutorial = OnboardingTutorial('C017BQA2RM4')
-    message = onboarding_tutorial.get_message_payload()
+    msg = HelloMsg('C017BQA2RM4')
+    message = msg.get_simple_message_payload(text)
     slack_web_client.chat_postMessage(**message)
     return f'message with text = {text} sent!!!'
-
-@slack_events_adapter.on("reaction_added")
-def reaction_added(event_data):
-  emoji = event_data["event"]["reaction"]
-  onboarding_tutorial = OnboardingTutorial('C017BQA2RM4')
-  message = onboarding_tutorial.get_message_payload()
-  slack_web_client.chat_postMessage(**message)
-  print(emoji)
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
