@@ -34,7 +34,7 @@ class HelloMsg:
             "username": self.username,
             "icon_emoji": self.icon_emoji,
             "blocks": [
-                make_section_block(text)
+                make_section_block(text),
             ],
         }
 

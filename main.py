@@ -21,6 +21,7 @@ def get_id(id):
 def send_msg(text):
     msg = HelloMsg('C017BQA2RM4')
     message = msg.get_simple_message_payload(text)
+    print(message)
     slack_web_client.chat_postMessage(**message)
     return f'message with text = {text} sent!!!'
 
