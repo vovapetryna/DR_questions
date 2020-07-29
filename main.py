@@ -90,6 +90,11 @@ proxies = os.environ['https_proxy']
 slack_events_adapter = SlackEventAdapter('97dc871214d1284acda832372929a19a', "/slack/events", app)
 slack_web_client = WebClient(token='xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ', proxy=proxies)
 
+msg = OnboardingTutorial('C017BQA2RM4')
+message = msg.get_message_payload()
+
+slack_web_client.chat_postMessage(**message)
+
 @app.route('/')
 def index():
     return 'run from git test 2)'
