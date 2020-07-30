@@ -8,7 +8,7 @@ else:
 from messages.message_base import MessageBase
 
 
-class HelloMsg(MessageBase):
+class AlertMessage(MessageBase):
     """Constructs the hello message with respect to
     a config based on MessageBase class"""
 
@@ -22,19 +22,17 @@ class HelloMsg(MessageBase):
             "username": self.username,
             "icon_emoji": self.icon_emoji,
             "blocks": [
-                self.make_section_block(msg_cfg.hello_message['hello']),
+                self.make_section_block(msg_cfg.alert_message['rating_cheat']),
             ],
         }
 
-    def please_message(self, lead_user, thread_ts):
+    def success_message(self):
         return {
-            'thread_ts': thread_ts,
-            'channel': self.channel,
-            'username': self.username,
-            'icon_emoji': self.icon_emoji,
-            'blocks': [
-                self.make_section_block(msg_cfg.thread_message['add_lead'].format(lead_user)),
-                MessageBase.DIVIDER_BLOCK,
-                self.make_section_block(msg_cfg.thread_message['answer_rule']),
+            "ts": self.timestamp,
+            "channel": self.channel,
+            "username": self.username,
+            "icon_emoji": self.icon_emoji,
+            "blocks": [
+                self.make_section_block(msg_cfg.alert_message['answer_success']),
             ],
         }

@@ -1,5 +1,6 @@
 lang = 'en'
 module_number = 8
+db_name = 'db.db'
 
 secure = {
     "bot_token" : "xoxb-1262742172500-1260429747301-YDLTuN5pUueGYCWYBoQNnTTQ",
@@ -9,4 +10,5 @@ secure = {
 bot_info = {
     'name': 'DRquestions',
     'icon_emoji': ':robot_face:',
+    'user_id': 'U017NCMMZ8V',
     }
